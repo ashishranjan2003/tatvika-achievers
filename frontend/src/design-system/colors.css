@@ -1,0 +1,175 @@
+/**
+ * Tatvika Achievers - Premium EdTech Design System
+ * CSS Custom Properties for Colors
+ */
+
+:root {
+  /* ========================================================================
+     PRIMARY COLORS - Trust & Academics
+     ======================================================================== */
+  --color-primary-navy: #0a192f;
+  --color-primary-navy-50: #f5f7fb;
+  --color-primary-navy-100: #e8edf5;
+  --color-primary-navy-200: #c9d9e8;
+  --color-primary-navy-300: #a3b8d8;
+  --color-primary-navy-400: #6b88c1;
+  --color-primary-navy-500: #3d5a8c;
+  --color-primary-navy-600: #0a192f;
+  --color-primary-navy-700: #061427;
+  --color-primary-navy-800: #040d19;
+
+  /* ========================================================================
+     SECONDARY ACCENT - Achievement & Success
+     ======================================================================== */
+  --color-gold-premium: #d4af37;
+  --color-gold-light: #f0e6d2;
+  --color-gold-lighter: #fbf8f0;
+  --color-gold-dark: #aa8c1f;
+
+  /* ========================================================================
+     BACKGROUNDS
+     ======================================================================== */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-bg-tertiary: #f2f5f9;
+  --color-bg-hover: #f5f7fb;
+
+  /* ========================================================================
+     SEMANTIC COLORS
+     ======================================================================== */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  /* ========================================================================
+     NEUTRAL COLORS
+     ======================================================================== */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* ========================================================================
+     TEXT COLORS
+     ======================================================================== */
+  --color-text-primary: #0a192f;
+  --color-text-secondary: #4b5563;
+  --color-text-tertiary: #9ca3af;
+  --color-text-inverse: #ffffff;
+
+  /* ========================================================================
+     BORDER COLORS
+     ======================================================================== */
+  --color-border-light: rgba(255, 255, 255, 0.25);
+  --color-border-default: #e5e7eb;
+  --color-border-dark: #d1d5db;
+}
+
+:root[data-theme='dark'] {
+  --color-bg-primary: #07111f;
+  --color-bg-secondary: #0d172d;
+  --color-bg-tertiary: #111f38;
+  --color-bg-hover: #162544;
+  --color-text-primary: #e2e8f0;
+  --color-text-secondary: #94a3b8;
+  --color-text-tertiary: #cbd5e1;
+  --color-border-default: #233349;
+  --color-border-dark: #334155;
+  --color-white: #f8fafc;
+  --color-gold-premium: #d4af37;
+  --color-gold-dark: #aa8c1f;
+  --color-primary-navy: #e2e8f0;
+  --color-primary-navy-600: #cbd5e1;
+  --color-primary-navy-700: #94a3b8;
+  --color-primary-navy-800: #475569;
+  --color-primary-navy-900: #334155;
+  --btn-ghost-text: #e2e8f0;
+  --btn-ghost-border: #475569;
+  --btn-ghost-hover-bg: rgba(226, 232, 240, 0.08);
+  --card-bg: #0f172a;
+}
+
+/* ============================================================================
+   COLOR UTILITY CLASSES
+   ============================================================================ */
+
+/* Background Utilities */
+.bg-primary-navy {
+  background-color: var(--color-primary-navy);
+}
+
+.bg-gold-premium {
+  background-color: var(--color-gold-premium);
+}
+
+.bg-white {
+  background-color: var(--color-white);
+}
+
+.bg-gray-light {
+  background-color: var(--color-bg-secondary);
+}
+
+/* Text Color Utilities */
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-white {
+  color: var(--color-text-inverse);
+}
+
+/* Border Utilities */
+.border-default {
+  border-color: var(--color-border-default);
+}
+
+.border-navy {
+  border-color: var(--color-primary-navy);
+}
+
+/* Status Colors */
+.text-success {
+  color: var(--color-success);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.text-error {
+  color: var(--color-error);
+}
+
+.text-info {
+  color: var(--color-info);
+}
+
+.bg-success {
+  background-color: var(--color-success);
+}
+
+.bg-warning {
+  background-color: var(--color-warning);
+}
+
+.bg-error {
+  background-color: var(--color-error);
+}
+
+.bg-info {
+  background-color: var(--color-info);
+}

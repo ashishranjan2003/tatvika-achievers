@@ -1,0 +1,401 @@
+/**
+ * Tatvika Achievers - Layout Component Styles
+ * Header, Footer, and theme-specific styling
+ */
+
+/* ============================================================================
+   HEADER STYLES
+   ============================================================================ */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border-default);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.header-light {
+  background-color: var(--color-white);
+  color: var(--color-text-primary);
+}
+
+.header-dark {
+  background-color: var(--color-primary-navy-800);
+  color: var(--color-text-inverse);
+  border-bottom-color: var(--color-primary-navy-700);
+}
+
+/* Logo Styles */
+.logo {
+  cursor: pointer;
+  transition: transform var(--transition-base);
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Navigation Links */
+.nav-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-gold-premium);
+  transition: width var(--transition-base);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link-mobile {
+  display: block;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: var(--spacing-2);
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg);
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-primary);
+}
+
+.mobile-menu-btn:hover {
+  color: var(--color-gold-premium);
+}
+
+/* ============================================================================
+   FOOTER STYLES
+   ============================================================================ */
+
+.footer {
+  margin-top: auto;
+  background-color: var(--color-bg-primary);
+}
+
+.footer-light {
+  background-color: var(--color-white);
+  color: var(--color-text-primary);
+}
+
+.footer-dark {
+  background-color: var(--color-primary-navy-900);
+  color: var(--color-text-inverse);
+}
+
+/* Newsletter Section */
+.newsletter-section {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.newsletter-section input {
+  border-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.newsletter-section input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.newsletter-section input:focus {
+  border-color: var(--color-gold-premium);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Footer Links Grid */
+.footer h5 {
+  color: var(--color-primary-navy);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footer-dark h5 {
+  color: var(--color-gold-premium);
+}
+
+.footer a {
+  transition: color var(--transition-base);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: var(--color-gold-premium);
+}
+
+/* Social Icons */
+.footer .social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-base);
+}
+
+.footer .social-icon:hover {
+  background-color: var(--color-primary-navy);
+  color: var(--color-text-inverse);
+  transform: translateY(-3px);
+}
+
+/* Footer Contact Info */
+.footer-contact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-6);
+  margin-bottom: var(--spacing-8);
+  padding-bottom: var(--spacing-8);
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.footer-contact h6 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-2);
+  color: var(--color-primary-navy);
+}
+
+.footer-dark .footer-contact h6 {
+  color: var(--color-gold-premium);
+}
+
+.footer-contact a,
+.footer-contact p {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.footer-dark .footer-contact a,
+.footer-dark .footer-contact p {
+  color: var(--color-gray-400);
+}
+
+/* Copyright Section */
+.footer-copyright {
+  padding-top: var(--spacing-6);
+  border-top: 1px solid var(--color-border-default);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-tertiary);
+}
+
+.footer-dark .footer-copyright {
+  border-top-color: var(--color-primary-navy-700);
+  color: var(--color-gray-500);
+}
+
+/* ============================================================================
+   MAIN CONTENT AREA
+   ============================================================================ */
+
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-wrapper.light {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+.layout-wrapper.dark {
+  background-color: var(--color-primary-navy-900);
+  color: var(--color-text-inverse);
+}
+
+.layout-wrapper.dark .bg-white {
+  background-color: var(--color-bg-secondary) !important;
+}
+
+.layout-wrapper.dark .bg-white\/95,
+.layout-wrapper.dark .bg-white\/90,
+.layout-wrapper.dark .bg-white\/80 {
+  background-color: rgba(15, 23, 42, 0.92) !important;
+}
+
+.layout-wrapper.dark .text-gray-600,
+.layout-wrapper.dark .text-gray-700,
+.layout-wrapper.dark .text-gray-500,
+.layout-wrapper.dark .text-gray-400,
+.layout-wrapper.dark .text-gray-800 {
+  color: var(--color-text-secondary) !important;
+}
+
+.layout-wrapper.dark .border-gray-200,
+.layout-wrapper.dark .border-gray-300,
+.layout-wrapper.dark .border-gray-100 {
+  border-color: var(--color-border-default) !important;
+}
+
+.layout-wrapper.dark .shadow-lg,
+.layout-wrapper.dark .shadow-md,
+.layout-wrapper.dark .shadow-sm {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
+
+/* ============================================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .header {
+    padding: var(--spacing-3) 0;
+  }
+
+  .logo h1 {
+    font-size: 1.25rem;
+  }
+
+  .nav-desktop {
+    display: none;
+  }
+
+  .footer {
+    padding: var(--spacing-6) var(--spacing-4);
+  }
+}
+
+@media (max-width: 640px) {
+  .newsletter-section {
+    padding: var(--spacing-8) var(--spacing-4);
+  }
+
+  .newsletter-section .form-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .footer-contact {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================================
+   DARK MODE TRANSITIONS
+   ============================================================================ */
+
+.layout-wrapper,
+.header,
+.footer,
+.nav-link,
+.form-input {
+  transition: background-color var(--transition-base),
+    color var(--transition-base),
+    border-color var(--transition-base);
+}
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================ */
+
+.nav-link:focus-visible,
+.footer a:focus-visible,
+.theme-toggle:focus-visible,
+.mobile-menu-btn:focus-visible {
+  outline: 2px solid var(--color-primary-navy);
+  outline-offset: 2px;
+}
+
+.layout-wrapper.dark .nav-link:focus-visible,
+.layout-wrapper.dark .footer a:focus-visible,
+.layout-wrapper.dark .theme-toggle:focus-visible,
+.layout-wrapper.dark .mobile-menu-btn:focus-visible {
+  outline-color: var(--color-gold-premium);
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .nav-link,
+  .theme-toggle,
+  .logo,
+  .mobile-menu {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+
+@media print {
+  .header,
+  .footer {
+    display: none;
+  }
+
+  .main-content {
+    min-height: auto;
+  }
+}

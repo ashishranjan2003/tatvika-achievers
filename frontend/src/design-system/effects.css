@@ -1,0 +1,390 @@
+/**
+ * Tatvika Achievers - Premium EdTech Design System
+ * Visual Effects - Glassmorphism, Shadows, Borders
+ */
+
+:root {
+  /* ========================================================================
+     GLASSMORPHISM EFFECT
+     ======================================================================== */
+  --glass-background: rgba(255, 255, 255, 0.45);
+  --glass-backdrop-filter: blur(12px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.25);
+  --glass-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+
+  /* ========================================================================
+     SHADOWS
+     ======================================================================== */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-none: none;
+
+  /* ========================================================================
+     BLUR EFFECTS
+     ======================================================================== */
+  --blur-sm: blur(4px);
+  --blur-md: blur(12px);
+  --blur-lg: blur(20px);
+
+  /* ========================================================================
+     BORDER RADIUS
+     ======================================================================== */
+  --radius-none: 0;
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 0.75rem; /* 12px */
+  --radius-xl: 1rem; /* 16px */
+  --radius-2xl: 1.5rem; /* 24px */
+  --radius-full: 9999px;
+
+  /* ========================================================================
+     TRANSITIONS
+     ======================================================================== */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  --timing-linear: linear;
+  --timing-ease: ease;
+  --timing-ease-in: ease-in;
+  --timing-ease-out: ease-out;
+  --timing-ease-in-out: ease-in-out;
+}
+
+/* ============================================================================
+   GLASSMORPHISM EFFECT
+   ============================================================================ */
+
+.glass-effect {
+  background: var(--glass-background);
+  backdrop-filter: var(--glass-backdrop-filter);
+  -webkit-backdrop-filter: var(--glass-backdrop-filter);
+  border: var(--glass-border);
+  box-shadow: var(--glass-box-shadow);
+}
+
+/* Glassmorphism card variant */
+.glass-card {
+  background: var(--glass-background);
+  backdrop-filter: var(--glass-backdrop-filter);
+  -webkit-backdrop-filter: var(--glass-backdrop-filter);
+  border: var(--glass-border);
+  box-shadow: var(--glass-box-shadow);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-6);
+}
+
+/* Glassmorphism button variant */
+.glass-button {
+  background: var(--glass-background);
+  backdrop-filter: var(--glass-backdrop-filter);
+  -webkit-backdrop-filter: var(--glass-backdrop-filter);
+  border: var(--glass-border);
+  box-shadow: var(--glass-box-shadow);
+}
+
+/* ============================================================================
+   SHADOW UTILITIES
+   ============================================================================ */
+
+.shadow-none {
+  box-shadow: var(--shadow-none);
+}
+
+.shadow-xs {
+  box-shadow: var(--shadow-xs);
+}
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+.shadow-2xl {
+  box-shadow: var(--shadow-2xl);
+}
+
+/* Hover shadow effects */
+.hover-shadow-md:hover {
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--transition-base);
+}
+
+.hover-shadow-lg:hover {
+  box-shadow: var(--shadow-lg);
+  transition: box-shadow var(--transition-base);
+}
+
+/* ============================================================================
+   BLUR UTILITIES
+   ============================================================================ */
+
+.blur-sm {
+  filter: var(--blur-sm);
+}
+
+.blur-md {
+  filter: var(--blur-md);
+}
+
+.blur-lg {
+  filter: var(--blur-lg);
+}
+
+.blur-none {
+  filter: none;
+}
+
+/* ============================================================================
+   BORDER RADIUS UTILITIES
+   ============================================================================ */
+
+.rounded-none {
+  border-radius: var(--radius-none);
+}
+
+.rounded-sm {
+  border-radius: var(--radius-sm);
+}
+
+.rounded-md {
+  border-radius: var(--radius-md);
+}
+
+.rounded-lg {
+  border-radius: var(--radius-lg);
+}
+
+.rounded-xl {
+  border-radius: var(--radius-xl);
+}
+
+.rounded-2xl {
+  border-radius: var(--radius-2xl);
+}
+
+.rounded-full {
+  border-radius: var(--radius-full);
+}
+
+/* Individual corner radius */
+.rounded-t-lg {
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+}
+
+.rounded-b-lg {
+  border-bottom-left-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+}
+
+.rounded-l-lg {
+  border-top-left-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-lg);
+}
+
+.rounded-r-lg {
+  border-top-right-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+}
+
+/* ============================================================================
+   BORDER UTILITIES
+   ============================================================================ */
+
+.border {
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--color-border-default);
+}
+
+.border-0 {
+  border-width: 0;
+}
+
+.border-2 {
+  border-width: 2px;
+}
+
+.border-t {
+  border-top-width: 1px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-l {
+  border-left-width: 1px;
+}
+
+.border-r {
+  border-right-width: 1px;
+}
+
+/* ============================================================================
+   TRANSITION & ANIMATION UTILITIES
+   ============================================================================ */
+
+.transition-fast {
+  transition: all var(--transition-fast);
+}
+
+.transition-base {
+  transition: all var(--transition-base);
+}
+
+.transition-slow {
+  transition: all var(--transition-slow);
+}
+
+/* Specific transition properties */
+.transition-colors {
+  transition: background-color var(--transition-base), color var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.transition-shadow {
+  transition: box-shadow var(--transition-base);
+}
+
+.transition-transform {
+  transition: transform var(--transition-base);
+}
+
+/* Timing functions */
+.ease-linear {
+  transition-timing-function: var(--timing-linear);
+}
+
+.ease-in {
+  transition-timing-function: var(--timing-ease-in);
+}
+
+.ease-out {
+  transition-timing-function: var(--timing-ease-out);
+}
+
+.ease-in-out {
+  transition-timing-function: var(--timing-ease-in-out);
+}
+
+/* ============================================================================
+   HOVER & INTERACTIVE EFFECTS
+   ============================================================================ */
+
+/* Scale on hover */
+.hover-scale:hover {
+  transform: scale(1.05);
+  transition: transform var(--transition-base);
+}
+
+.hover-scale-sm:hover {
+  transform: scale(1.02);
+  transition: transform var(--transition-base);
+}
+
+/* Translate on hover */
+.hover-translate-y-up:hover {
+  transform: translateY(-4px);
+  transition: transform var(--transition-base);
+}
+
+/* Opacity effects */
+.hover-opacity:hover {
+  opacity: 0.8;
+  transition: opacity var(--transition-base);
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.opacity-75 {
+  opacity: 0.75;
+}
+
+.opacity-100 {
+  opacity: 1;
+}
+
+/* ============================================================================
+   FOCUS STATES (Accessibility)
+   ============================================================================ */
+
+.focus-ring {
+  outline: 2px solid var(--color-primary-navy);
+  outline-offset: 2px;
+}
+
+.focus-ring:focus {
+  outline: 2px solid var(--color-primary-navy);
+  outline-offset: 2px;
+}
+
+.focus-ring-gold:focus {
+  outline: 2px solid var(--color-gold-premium);
+  outline-offset: 2px;
+}
+
+/* ============================================================================
+   OVERLAY & BACKDROP UTILITIES
+   ============================================================================ */
+
+.backdrop-blur {
+  backdrop-filter: var(--glass-backdrop-filter);
+  -webkit-backdrop-filter: var(--glass-backdrop-filter);
+}
+
+.bg-overlay-dark {
+  background: rgba(10, 25, 47, 0.5);
+}
+
+.bg-overlay-light {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================================================
+   COMPOUND EFFECT CLASSES
+   ============================================================================ */
+
+/* Premium card effect combining glass + shadow */
+.card-premium {
+  background: var(--color-bg-primary);
+  border: var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.card-premium:hover {
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-2px);
+}
+
+/* Elevated surface */
+.surface-elevated {
+  background: var(--color-bg-primary);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
+}
+
+.surface-elevated-hover:hover {
+  box-shadow: var(--shadow-lg);
+  transition: box-shadow var(--transition-base);
+}
