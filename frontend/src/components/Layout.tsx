@@ -7,7 +7,12 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import './Layout.css';
 
-const navLinks = [
+type NavItem = {
+  label: string;
+  href: string;
+};
+
+const navLinks: NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Courses', href: '/courses' },
@@ -32,16 +37,16 @@ const Header: React.FC<{ theme: 'light' | 'dark'; toggleTheme: () => void }> = (
 
   return (
     <header className={`header header-${theme}`}>
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="relative flex h-20 w-full items-center justify-end px-5 sm:px-8 lg:px-10">
         {/* Logo */}
-        <div className="logo">
-          <h1 className="text-2xl font-bold text-primary-navy">
+        <div className="logo absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+          <h1 className="whitespace-nowrap text-2xl font-bold text-primary-navy">
             Tatvika <span className="text-gold-premium">Achievers</span>
           </h1>
         </div>
 
         {/* Right Side Actions */}
-        <div className="flex items-center gap-4">
+        <div className="ml-auto flex items-center gap-4">
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
@@ -137,22 +142,26 @@ const Header: React.FC<{ theme: 'light' | 'dark'; toggleTheme: () => void }> = (
 };
 
 const Sidebar: React.FC = () => (
-  <aside className="sidebar hidden lg:block border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
-    <div className="sticky top-0 h-screen pt-6 pb-10 px-6">
-      <div className="mb-10">
-        <p className="text-sm uppercase tracking-[0.35em] text-primary">Navigate</p>
-        <h2 className="mt-3 text-2xl font-bold text-primary-navy">Sections</h2>
+  <aside className="sidebar hidden border-r border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-950 lg:block">
+    <div className="sticky top-20 flex h-[calc(100vh-5rem)] flex-col px-6 py-10">
+      <div className="mb-8">
+        <p className="text-xs font-bold uppercase tracking-[0.24em] text-gold-premium">
+          Tatvika Achievers
+        </p>
+        <h2 className="mt-3 text-xl font-bold text-primary-navy dark:text-white">
+          Main Menu
+        </h2>
       </div>
-      <nav className="space-y-3">
+      <nav className="flex flex-col space-y-4" aria-label="Primary navigation">
         {navLinks.map((link) => (
           <NavLink
             key={link.label}
             to={link.href}
             className={({ isActive }) =>
-              `sidebar-link block rounded-3xl px-5 py-3 transition-all ${
+              `sidebar-link relative block rounded-lg px-4 py-3 text-sm font-semibold tracking-wide transition-all duration-200 ${
                 isActive
-                  ? 'bg-primary-navy text-white shadow-lg'
-                  : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-900'
+                  ? 'active bg-primary-navy text-white shadow-md'
+                  : 'text-gray-700 hover:bg-gray-100 hover:pl-6 hover:text-primary-navy dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-white'
               }`
             }
           >
@@ -388,7 +397,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     try {
       const saved = localStorage.getItem('tatvika-theme');
       return (saved as 'light' | 'dark') || 'light';
-    } catch (e) {
+    } catch {
       return 'light';
     }
   });
@@ -402,7 +411,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     }
     try {
       localStorage.setItem('tatvika-theme', theme);
-    } catch (e) {
+    } catch {
       // ignore
     }
   }, [theme]);
@@ -415,9 +424,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className={`layout-wrapper ${theme}`} data-theme={theme}>
       <Header theme={theme} toggleTheme={toggleTheme} />
 
-      <div className="layout-body lg:grid lg:grid-cols-[280px_1fr]">
+      <div className="layout-body grid pt-20 lg:grid-cols-[18rem_minmax(0,1fr)]">
         <Sidebar />
-        <main className="main-content min-h-screen px-6 py-8 lg:px-10 lg:py-10">
+        <main className="main-content min-h-screen px-5 py-10 sm:px-8 lg:px-12">
           {children}
         </main>
       </div>
