@@ -1,3 +1,174 @@
+.tatvika-shell {
+  min-height: 100vh;
+  background: #ffffff;
+  color: #0a192f;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.tatvika-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  display: flex;
+  height: 74px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 96px 0 152px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 24px rgba(10, 25, 47, 0.16);
+}
+
+.tatvika-header-spacer {
+  width: 140px;
+}
+
+.tatvika-brand {
+  margin: 0;
+  color: #d4af37;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+}
+
+.tatvika-brand-link {
+  color: #d4af37;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.tatvika-brand-link:hover {
+  color: #ffffff;
+}
+
+.tatvika-portal-link {
+  display: inline-flex;
+  min-width: 148px;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 180ms ease;
+}
+
+.tatvika-portal-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tatvika-body {
+  min-height: 100vh;
+  padding-top: 74px;
+}
+
+.tatvika-sidebar {
+  position: fixed;
+  top: 74px;
+  bottom: 0;
+  left: 0;
+  z-index: 40;
+  width: 380px;
+  background: #0a192f;
+  box-shadow: 10px 0 28px rgba(10, 25, 47, 0.18);
+}
+
+.tatvika-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 26px 30px;
+}
+
+.tatvika-nav-link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 8px;
+  color: #cbd5e1;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.tatvika-nav-link:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+
+.tatvika-nav-link-active,
+.tatvika-nav-link-active:hover {
+  background: rgba(245, 158, 11, 0.1) !important;
+  color: #d4af37 !important;
+}
+
+.tatvika-main {
+  min-height: calc(100vh - 74px);
+  margin-left: 380px;
+  background: #ffffff;
+  padding: 52px 66px 80px;
+}
+
+.tatvika-content {
+  max-width: 1160px;
+}
+
+@media (max-width: 900px) {
+  .tatvika-header {
+    padding: 0 18px;
+  }
+
+  .tatvika-header-spacer {
+    display: none;
+  }
+
+  .tatvika-brand {
+    font-size: 20px;
+  }
+
+  .tatvika-portal-link {
+    min-width: auto;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  .tatvika-sidebar {
+    position: static;
+    width: 100%;
+  }
+
+  .tatvika-body {
+    display: block;
+  }
+
+  .tatvika-nav {
+    flex-direction: row;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 12px;
+  }
+
+  .tatvika-nav-link {
+    width: auto;
+    min-width: max-content;
+    font-size: 15px;
+  }
+
+  .tatvika-main {
+    margin-left: 0;
+    padding: 28px 18px 52px;
+  }
+}
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;

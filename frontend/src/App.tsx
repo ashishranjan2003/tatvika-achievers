@@ -30,38 +30,50 @@ const navItems: NavItem[] = [
 
 function AppShell() {
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 font-primary text-slate-950 selection:bg-amber-200">
-      <header className="fixed left-0 top-0 z-50 flex h-16 w-full items-center justify-between border-b border-slate-200 bg-white px-8 shadow-sm">
-        <div className="hidden w-32 md:block" />
-        <h1 className="text-center text-2xl font-extrabold tracking-normal text-[#0A192F]">
+    <div className="tatvika-shell">
+      <header
+        className="tatvika-header"
+        style={{ backgroundColor: '#0A192F', borderBottomColor: 'rgba(255, 255, 255, 0.12)' }}
+      >
+        <div className="tatvika-header-spacer" />
+        <h1 className="tatvika-brand">
           <Link
             to="/"
-            className="text-[#0A192F] transition-colors hover:text-amber-600"
+            className="tatvika-brand-link"
+            style={{ color: '#D4AF37' }}
           >
             Tatvika Achievers
           </Link>
         </h1>
         <Link
           to="/login"
-          className="rounded-lg bg-[#0A192F] px-5 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-slate-800"
+          className="tatvika-portal-link"
+          style={{ borderColor: '#FFFFFF', color: '#FFFFFF' }}
         >
           Student Portal
         </Link>
       </header>
 
-      <div className="flex min-h-screen flex-1 pt-16">
-        <aside className="fixed bottom-0 left-0 top-16 z-40 flex w-64 flex-col bg-[#0A192F] text-slate-300 shadow-xl">
-          <nav className="flex-1 space-y-2 px-4 py-8" aria-label="Primary navigation">
+      <div className="tatvika-body">
+        <aside
+          className="tatvika-sidebar"
+          style={{ backgroundColor: '#0A192F', color: '#cbd5e1' }}
+        >
+          <nav className="tatvika-nav" aria-label="Primary navigation">
             {navItems.map((item) => (
               <NavLink
                 key={item.label}
                 to={item.href}
+                style={({ isActive }) => ({
+                  backgroundColor: isActive ? 'rgba(245, 158, 11, 0.1)' : 'transparent',
+                  color: isActive ? '#D4AF37' : '#cbd5e1',
+                })}
                 className={({ isActive }) =>
                   [
-                    'flex w-full items-center rounded-xl px-4 py-3 text-left text-sm font-medium tracking-normal transition-all duration-200',
+                    'tatvika-nav-link',
                     isActive
-                      ? 'border-l-4 border-amber-400 bg-amber-400/10 pl-3 text-amber-400'
-                      : 'text-slate-300 hover:bg-slate-800/60 hover:text-white',
+                      ? 'tatvika-nav-link-active'
+                      : 'tatvika-nav-link-default',
                   ].join(' ')
                 }
               >
@@ -71,8 +83,8 @@ function AppShell() {
           </nav>
         </aside>
 
-        <main className="ml-64 flex-1 bg-white p-8 md:p-12 lg:p-16">
-          <div className="mx-auto max-w-4xl space-y-12">
+        <main className="tatvika-main">
+          <div className="tatvika-content">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />

@@ -8,7 +8,7 @@ const Home: React.FC = () => {
         <div className="space-y-4">
           <h2 className="text-4xl font-black leading-tight tracking-normal text-[#0A192F] md:text-5xl">
             Empowering Students for <br />
-            <span className="bg-gradient-to-r from-[#0A192F] to-amber-600 bg-clip-text text-transparent">
+            <span className="text-[#0A192F]">
               Academic Excellence
             </span>
           </h2>
@@ -48,7 +48,7 @@ const Home: React.FC = () => {
       </section>
 
       <section className="mt-12">
-        <h2 className="mb-6 text-3xl font-bold tracking-normal text-slate-950">Features</h2>
+        <h2 className="mb-6 text-3xl font-bold tracking-normal text-[#0A192F]">Features</h2>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {[
             'Expert Faculty',
@@ -59,7 +59,7 @@ const Home: React.FC = () => {
             'Affordable Learning',
           ].map((feature) => (
             <article key={feature} className="rounded-lg border border-slate-200 bg-white p-6 shadow-md">
-              <h4 className="mb-2 font-semibold text-slate-950">{feature}</h4>
+              <h4 className="mb-2 font-semibold text-[#0A192F]">{feature}</h4>
               <p className="text-sm text-slate-600">High-quality content and support for every student.</p>
             </article>
           ))}
@@ -67,11 +67,11 @@ const Home: React.FC = () => {
       </section>
 
       <section className="mt-12">
-        <h2 className="mb-6 text-3xl font-bold tracking-normal text-slate-950">Popular Courses</h2>
+        <h2 className="mb-6 text-3xl font-bold tracking-normal text-[#0A192F]">Popular Courses</h2>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {['Accounts', 'Business Studies', 'Economics'].map((course) => (
             <div key={course} className="rounded-lg border border-slate-200 bg-white p-6 shadow-lg">
-              <h3 className="mb-2 text-xl font-semibold text-slate-950">{course}</h3>
+              <h3 className="mb-2 text-xl font-semibold text-[#0A192F]">{course}</h3>
               <p className="mb-4 text-sm text-slate-600">In-depth syllabus, expert guidance, and practice tests.</p>
               <Link
                 to="/courses"
@@ -86,7 +86,7 @@ const Home: React.FC = () => {
       </section>
 
       <section className="mt-12">
-        <h2 className="mb-6 text-3xl font-bold tracking-normal text-slate-950">Testimonials</h2>
+        <h2 className="mb-6 text-3xl font-bold tracking-normal text-[#0A192F]">Testimonials</h2>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {[1, 2, 3].map((student) => (
             <blockquote key={student} className="rounded-lg border border-slate-200 bg-white p-6 shadow-md">
@@ -94,7 +94,7 @@ const Home: React.FC = () => {
               <footer className="flex items-center gap-3">
                 <div className="h-10 w-10 rounded-full bg-slate-200" />
                 <div>
-                  <p className="font-semibold text-slate-950">Student {student}</p>
+                  <p className="font-semibold text-[#0A192F]">Student {student}</p>
                   <p className="text-xs text-slate-500">Placed in top universities</p>
                 </div>
               </footer>

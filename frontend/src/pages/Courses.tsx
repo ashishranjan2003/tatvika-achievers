@@ -1,17 +1,17 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const CourseCard: React.FC<{ id: string; title: string; price?: string; duration?: string }> = ({ id, title, price, duration }) => (
-  <article className="card p-6 bg-white/95 dark:bg-gray-900/60 rounded-lg shadow-lg">
-    <div className="h-36 bg-gradient-to-br from-primary-navy-50 to-primary-navy-100 rounded mb-4 flex items-center justify-center text-primary-navy">Illustration</div>
-    <h3 className="font-semibold text-xl mb-2">{title}</h3>
-    <p className="text-sm text-gray-600 mb-4">Short description of the course covering syllabus highlights.</p>
+  <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-amber-400/50">
+    <div className="mb-4 flex h-36 items-center justify-center rounded-xl bg-amber-500/10 text-sm font-bold uppercase tracking-wider text-[#D4AF37]">Course</div>
+    <h3 className="mb-2 text-xl font-bold text-[#0A192F]">{title}</h3>
+    <p className="mb-4 text-sm text-slate-600">Short description of the course covering syllabus highlights.</p>
     <div className="flex items-center justify-between">
       <div>
-        <p className="text-sm text-gray-500">{duration || '3 months'}</p>
-        <p className="text-lg font-bold">{price || '₹1,999'}</p>
+        <p className="text-sm text-slate-500">{duration || '3 months'}</p>
+        <p className="text-lg font-bold text-[#0A192F]">{price || '₹1,999'}</p>
       </div>
-      <Link to={`/courses/${id}`} className="btn btn-primary" aria-label={`View ${title}`}>View</Link>
+      <Link to={`/courses/${id}`} className="rounded-xl bg-[#0A192F] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-slate-800" aria-label={`View ${title}`}>View</Link>
     </div>
   </article>
 );
@@ -42,10 +42,10 @@ const Courses: React.FC = () => {
 
   return (
     <main className="container mx-auto py-12">
-      <header className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <h1 className="text-4xl font-bold">Courses</h1>
+      <header className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <h1 className="text-4xl font-bold text-[#0A192F]">Courses</h1>
 
-        <div className="flex gap-3 items-center">
+        <div className="flex items-center gap-3">
           <label className="sr-only" htmlFor="course-search">Search courses</label>
           <input id="course-search" className="form-input" placeholder="Search courses" value={query} onChange={(e) => setQuery(e.target.value)} />
 
@@ -65,12 +65,12 @@ const Courses: React.FC = () => {
       </header>
 
       <section>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {filtered.map((c) => (
             <CourseCard key={c.id} id={c.id} title={c.title} price={c.price} />
           ))}
         </div>
-        {filtered.length === 0 && <p className="mt-6 text-gray-600">No courses found for the selected filters.</p>}
+        {filtered.length === 0 && <p className="mt-6 text-slate-600">No courses found for the selected filters.</p>}
       </section>
     </main>
   );

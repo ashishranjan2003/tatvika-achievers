@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Notes: React.FC = () => {
@@ -25,11 +25,11 @@ const Notes: React.FC = () => {
   return (
     <main className="container mx-auto py-12">
       <header className="mb-6">
-        <h1 className="text-4xl font-bold mb-2">Notes & Resources</h1>
-        <p className="text-gray-600">Download chapter notes, summaries and quick revision sheets for all subjects.</p>
+        <h1 className="mb-2 text-4xl font-bold text-[#0A192F]">Notes & Resources</h1>
+        <p className="text-slate-600">Download chapter notes, summaries and quick revision sheets for all subjects.</p>
       </header>
 
-      <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div className="flex-1">
           <label className="sr-only" htmlFor="notes-search">Search notes</label>
           <input id="notes-search" className="form-input w-full" placeholder="Search notes, chapters, topics..." value={query} onChange={(e) => setQuery(e.target.value)} />
@@ -47,19 +47,20 @@ const Notes: React.FC = () => {
       </div>
 
       <section aria-live="polite">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {filtered.map((n) => (
-            <article key={n.id} className="p-4 bg-white/90 dark:bg-gray-800/60 backdrop-blur rounded-lg shadow-md">
-              <h3 className="font-semibold mb-1">{n.title}</h3>
-              <p className="text-sm text-gray-600 mb-3">{n.subject} • {n.size}</p>
+            <article key={n.id} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-amber-400/50">
+              <span className="rounded-full bg-amber-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#D4AF37]">{n.subject}</span>
+              <h3 className="mb-1 mt-3 text-xl font-bold text-[#0A192F]">{n.title}</h3>
+              <p className="mb-3 text-sm text-slate-600">{n.size}</p>
               <div className="flex gap-2">
-                <button className="btn btn-secondary" aria-label={`Preview ${n.title}`}>Preview</button>
-                <a className="btn btn-primary" href="#" onClick={(e) => e.preventDefault()} aria-label={`Download ${n.title}`}>Download</a>
+                <button className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-[#0A192F] transition-colors hover:bg-slate-50" aria-label={`Preview ${n.title}`}>Preview</button>
+                <a className="rounded-xl bg-[#0A192F] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-slate-800" href="#" onClick={(e) => e.preventDefault()} aria-label={`Download ${n.title}`}>Download</a>
               </div>
             </article>
           ))}
         </div>
-        {filtered.length === 0 && <p className="mt-6 text-gray-600">No resources found for your search.</p>}
+        {filtered.length === 0 && <p className="mt-6 text-slate-600">No resources found for your search.</p>}
       </section>
     </main>
   );

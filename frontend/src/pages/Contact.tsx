@@ -21,12 +21,12 @@ const Contact: React.FC = () => {
       <div className="grid gap-10 lg:grid-cols-[1.2fr,0.8fr]">
         <section className="space-y-6">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-primary">Contact</p>
-            <h1 className="text-4xl font-bold mt-3">Get in touch with Tatvika Achievers</h1>
-            <p className="mt-4 text-gray-600">Have questions about courses, enrollment, or student support? Send us a message and our admissions team will respond within one business day.</p>
+            <p className="text-sm uppercase tracking-[0.3em] text-[#D4AF37]">Contact</p>
+            <h1 className="mt-3 text-4xl font-bold text-[#0A192F]">Get in touch with Tatvika Achievers</h1>
+            <p className="mt-4 text-slate-600">Have questions about courses, enrollment, or student support? Send us a message and our admissions team will respond within one business day.</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4 bg-white/95 dark:bg-gray-900/70 p-6 rounded-3xl shadow-lg">
+          <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             {status && <div className="rounded-xl bg-green-50 border border-green-200 p-4 text-sm text-green-700">{status}</div>}
             <label className="block">
               <span className="text-sm font-medium">Name</span>
@@ -48,32 +48,32 @@ const Contact: React.FC = () => {
           </form>
         </section>
 
-        <aside className="space-y-6 rounded-3xl bg-white/95 dark:bg-gray-900/70 p-6 shadow-lg">
+        <aside className="space-y-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="space-y-3">
-            <h2 className="text-2xl font-semibold">Office Information</h2>
-            <p className="text-gray-600">Visit our campus or drop us a message for admissions support, career counseling, or course guidance.</p>
+            <h2 className="text-2xl font-semibold text-[#0A192F]">Office Information</h2>
+            <p className="text-slate-600">Visit our campus or drop us a message for admissions support, career counseling, or course guidance.</p>
           </div>
 
-          <div className="space-y-4 rounded-3xl bg-primary/10 p-5">
+          <div className="space-y-4 rounded-2xl bg-amber-500/10 p-5">
             <div>
-              <p className="text-sm text-gray-500">Phone</p>
-              <p className="font-medium">+91 98765 43210</p>
+              <p className="text-sm text-slate-500">Phone</p>
+              <p className="font-medium text-[#0A192F]">+91 98765 43210</p>
             </div>
             <div>
-              <p className="text-sm text-gray-500">Email</p>
-              <p className="font-medium">hello@tatvikaachievers.com</p>
+              <p className="text-sm text-slate-500">Email</p>
+              <p className="font-medium text-[#0A192F]">hello@tatvikaachievers.com</p>
             </div>
             <div>
-              <p className="text-sm text-gray-500">Address</p>
-              <p className="font-medium">123 Education Hub, New Delhi, India</p>
+              <p className="text-sm text-slate-500">Address</p>
+              <p className="font-medium text-[#0A192F]">123 Education Hub, New Delhi, India</p>
             </div>
           </div>
 
-          <div className="space-y-4 rounded-3xl overflow-hidden bg-gray-100 dark:bg-gray-800">
-            <div className="bg-primary/10 px-5 py-4">
-              <p className="text-sm uppercase tracking-[0.2em] text-primary">Map</p>
+          <div className="overflow-hidden rounded-2xl bg-slate-100">
+            <div className="bg-amber-500/10 px-5 py-4">
+              <p className="text-sm uppercase tracking-[0.2em] text-[#D4AF37]">Map</p>
             </div>
-            <div className="h-72 bg-gradient-to-br from-primary-navy-50 to-primary-navy-100 flex items-center justify-center text-gray-500">
+            <div className="flex h-72 items-center justify-center bg-white text-slate-500">
               Map placeholder
             </div>
           </div>
