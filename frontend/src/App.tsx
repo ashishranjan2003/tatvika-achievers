@@ -1,6 +1,8 @@
 import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom'
 import './App.css'
 
+import tatvikaEmblem from './assets/tatvika-emblem.png'
+import tatvikaLogo from './assets/tatvika-logo.jpg'
 import Home from './pages/Home'
 import About from './pages/About'
 import Courses from './pages/Courses'
@@ -42,6 +44,7 @@ function AppShell() {
             className="tatvika-brand-link"
             style={{ color: '#D4AF37' }}
           >
+            <img src={tatvikaEmblem} alt="" className="tatvika-brand-emblem" />
             Tatvika Achievers
           </Link>
         </h1>
@@ -57,8 +60,11 @@ function AppShell() {
       <div className="tatvika-body">
         <aside
           className="tatvika-sidebar"
-          style={{ backgroundColor: '#0A192F', color: '#cbd5e1' }}
+          style={{ color: '#cbd5e1' }}
         >
+          <Link to="/" className="tatvika-sidebar-brand" aria-label="Tatvika Achievers home">
+            <img src={tatvikaLogo} alt="Tatvika Achievers" className="tatvika-sidebar-logo" />
+          </Link>
           <nav className="tatvika-nav" aria-label="Primary navigation">
             {navItems.map((item) => (
               <NavLink

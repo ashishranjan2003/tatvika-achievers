@@ -1,6 +1,6 @@
 .tatvika-shell {
   min-height: 100vh;
-  background: #ffffff;
+  background: #f8fafc;
   color: #0a192f;
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -13,13 +13,13 @@
   height: 74px;
   align-items: center;
   justify-content: space-between;
-  padding: 0 96px 0 152px;
+  padding: 0 96px 0 34px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 10px 24px rgba(10, 25, 47, 0.16);
 }
 
 .tatvika-header-spacer {
-  width: 140px;
+  display: none;
 }
 
 .tatvika-brand {
@@ -32,9 +32,22 @@
 }
 
 .tatvika-brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   color: #d4af37;
   text-decoration: none;
   transition: color 180ms ease;
+}
+
+.tatvika-brand-emblem {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.94);
+  object-fit: contain;
+  padding: 3px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
 }
 
 .tatvika-brand-link:hover {
@@ -72,9 +85,27 @@
   bottom: 0;
   left: 0;
   z-index: 40;
-  width: 380px;
-  background: #0a192f;
-  box-shadow: 10px 0 28px rgba(10, 25, 47, 0.18);
+  width: 240px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 25, 47, 0.96);
+  box-shadow: 8px 0 22px rgba(10, 25, 47, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.tatvika-sidebar-brand {
+  display: flex;
+  justify-content: center;
+  padding: 22px 18px 10px;
+  text-decoration: none;
+}
+
+.tatvika-sidebar-logo {
+  width: 138px;
+  height: 138px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.18);
 }
 
 .tatvika-nav {
@@ -82,18 +113,18 @@
   flex-direction: column;
   gap: 8px;
   margin: 0;
-  padding: 26px 30px;
+  padding: 14px 16px 26px;
 }
 
 .tatvika-nav-link {
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 44px;
-  padding: 0 14px;
+  min-height: 42px;
+  padding: 0 12px;
   border-radius: 8px;
   color: #cbd5e1;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 1;
   text-decoration: none;
@@ -113,9 +144,9 @@
 
 .tatvika-main {
   min-height: calc(100vh - 74px);
-  margin-left: 380px;
+  margin-left: 240px;
   background: #ffffff;
-  padding: 52px 66px 80px;
+  padding: 52px 56px 80px;
 }
 
 .tatvika-content {
