@@ -7,9 +7,9 @@ const Home: React.FC = () => {
       <section className="space-y-8">
         <div className="space-y-4">
           <h2 className="text-4xl font-black leading-tight tracking-normal text-[#0A192F] md:text-5xl">
-            Empowering Students for <br />
+            Empowering Students For <br />
             <span className="text-[#0A192F]">
-              Academic Excellence
+              Academic And Professional Excellence
             </span>
           </h2>
           <p className="max-w-2xl text-lg font-normal leading-relaxed text-slate-600">

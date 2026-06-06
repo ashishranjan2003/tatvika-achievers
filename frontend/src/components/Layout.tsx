@@ -365,13 +365,13 @@ const Footer: React.FC<{ theme: 'light' | 'dark' }> = ({ theme }) => {
                   href="tel:+919876543210"
                   className="text-sm text-gray-600 dark:text-gray-400 hover:text-gold-premium"
                 >
-                  +91 98765 43210
+                  +919310999571
                 </a>
               </div>
               <div>
                 <h6 className="font-semibold text-primary-navy mb-2">Address</h6>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  123 Education Hub, New Delhi, India
+                  J 104, Street No 6, Laxmi Nagar, New Delhi - 110092
                 </p>
               </div>
             </div>

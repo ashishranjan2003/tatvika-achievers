@@ -373,7 +373,7 @@ export function ContactPageExample() {
                 href="tel:+919876543210"
                 className="text-gold-premium hover:underline"
               >
-                +91 98765 43210
+                +919310999571
               </a>
             </div>
 

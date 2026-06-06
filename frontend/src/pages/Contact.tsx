@@ -51,21 +51,21 @@ const Contact: React.FC = () => {
         <aside className="space-y-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="space-y-3">
             <h2 className="text-2xl font-semibold text-[#0A192F]">Office Information</h2>
-            <p className="text-slate-600">Visit our campus or drop us a message for admissions support, career counseling, or course guidance.</p>
+            <p className="text-slate-600">Drop us a Message for admissions support, career counseling, or course guidance.</p>
           </div>
 
           <div className="space-y-4 rounded-2xl bg-amber-500/10 p-5">
             <div>
               <p className="text-sm text-slate-500">Phone</p>
-              <p className="font-medium text-[#0A192F]">+91 98765 43210</p>
+              <p className="font-medium text-[#0A192F]">+919310999571</p>
             </div>
             <div>
               <p className="text-sm text-slate-500">Email</p>
-              <p className="font-medium text-[#0A192F]">hello@tatvikaachievers.com</p>
+              <p className="font-medium text-[#0A192F]">tatvikaachievers@gmail.com</p>
             </div>
             <div>
               <p className="text-sm text-slate-500">Address</p>
-              <p className="font-medium text-[#0A192F]">123 Education Hub, New Delhi, India</p>
+              <p className="font-medium text-[#0A192F]">J 104, Street No 6, Laxmi Nagar, New Delhi - 110092</p>
             </div>
           </div>
 
