@@ -18,23 +18,6 @@ const Home: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-4" role="group" aria-label="Primary calls to action">
-          <Link
-            to="/courses"
-            className="rounded-xl bg-[#0A192F] px-8 py-3.5 font-bold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-xl"
-            aria-label="Enroll now"
-          >
-            Enroll Now
-          </Link>
-          <Link
-            to="/courses"
-            className="rounded-xl border-2 border-slate-200 bg-white px-8 py-3.5 font-bold text-[#0A192F] transition-all duration-200 hover:bg-slate-50"
-            aria-label="Explore courses"
-          >
-            Explore Courses
-          </Link>
-        </div>
-
         <div className="grid grid-cols-1 gap-6 pt-6 sm:grid-cols-2" aria-hidden>
           <div className="rounded-2xl border border-slate-100 bg-slate-50 p-6 shadow-sm transition-shadow hover:shadow-md">
             <div className="text-3xl font-black text-[#0A192F]">50K+</div>
