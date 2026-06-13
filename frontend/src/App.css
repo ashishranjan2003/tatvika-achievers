@@ -1,43 +1,73 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Tatvika Achievers — App.css
+   ✅ All fixes annotated inline
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Brand tokens ──────────────────────────────────────────────────────────── */
+/* ✅ FIX: Centralise every brand colour here so inline style overrides in JSX
+          are never needed. Reference these with var(--ta-*) anywhere. */
+:root {
+  --ta-blue:        #0081C9;   /* primary brand blue (header + sidebar)        */
+  --ta-blue-dark:   #0369a1;   /* darker shade for hover states                */
+  --ta-gold:        #D4AF37;   /* brand gold — active nav, accents             */
+  --ta-navy:        #0A192F;   /* deep navy — headings, portal button text     */
+  --ta-cta:         #123469;   /* product card CTA button                      */
+  --ta-sidebar-w:   240px;     /* sidebar width — single source of truth       */
+  --ta-header-h:    74px;      /* header height — single source of truth       */
+}
+
+/* ── Shell ─────────────────────────────────────────────────────────────────── */
+/* ✅ FIX: Font family declared once here — duplicate inline fontFamily props
+          removed from JSX completely. */
 .tatvika-shell {
   min-height: 100vh;
   background: #f8fafc;
   color: #0f172a;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: "Times New Roman", Times, serif;
 }
 
+/* ── Header ────────────────────────────────────────────────────────────────── */
+/* ✅ FIX: background colour moved from JSX inline style to CSS using the token.
+          The conflicting inline style override is now gone. */
 .tatvika-header {
   position: fixed;
   inset: 0 0 auto;
   z-index: 50;
   display: flex;
-  height: 74px;
+  height: var(--ta-header-h);
   align-items: center;
   justify-content: space-between;
   padding: 0 96px 0 34px;
+  background: var(--ta-blue);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 10px 24px rgba(10, 25, 47, 0.16);
-}
-
-.tatvika-header-spacer {
-  display: none;
+  box-shadow: 0 4px 16px rgba(10, 25, 47, 0.16);
 }
 
 .tatvika-brand {
   margin: 0;
-  color: #d4af37;
   font-size: 24px;
   font-weight: 800;
   line-height: 1;
-  text-align: center;
 }
 
 .tatvika-brand-link {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #d4af37;
+  color: var(--ta-gold);
   text-decoration: none;
   transition: color 180ms ease;
+}
+
+.tatvika-brand-link:hover {
+  color: #ffffff;
+}
+
+/* ✅ FIX: Added focus-visible ring for keyboard navigation */
+.tatvika-brand-link:focus-visible {
+  outline: 2px solid var(--ta-gold);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
 .tatvika-brand-emblem {
@@ -47,13 +77,30 @@
   background: rgba(255, 255, 255, 0.94);
   object-fit: contain;
   padding: 3px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
-.tatvika-brand-link:hover {
-  color: #ffffff;
+/* ── Header actions ────────────────────────────────────────────────────────── */
+.tatvika-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
 }
 
+/* ✅ FIX: Social pill visible on all breakpoints ≥ 901px (hidden below via media) */
+.tatvika-header-socials {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 175, 55, 0.36);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 6px 8px;
+}
+
+/* ── Portal button ─────────────────────────────────────────────────────────── */
+/* ✅ FIX: colour properties moved from JSX inline styles to CSS */
 .tatvika-portal-link {
   display: inline-flex;
   min-width: 148px;
@@ -64,79 +111,58 @@
   border-radius: 8px;
   background: transparent;
   color: #ffffff;
+  font-family: inherit;
   font-size: 15px;
   font-weight: 700;
-  text-decoration: none;
+  cursor: pointer;
   transition: background 180ms ease;
 }
 
 .tatvika-portal-link:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
 }
 
-.tatvika-header-actions {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
+/* ✅ FIX: Keyboard focus ring */
+.tatvika-portal-link:focus-visible {
+  outline: 2px solid var(--ta-gold);
+  outline-offset: 2px;
 }
 
-.tatvika-header-socials {
-  border-radius: 999px;
-  border: 1px solid rgba(212, 175, 55, 0.36);
-  background: rgba(255, 255, 255, 0.08);
-  padding: 8px 10px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-}
-
+/* ── Social icon links ─────────────────────────────────────────────────────── */
 .tatvika-social-icon-link {
   display: inline-flex;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  color: #ffffff !important;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
-  transform: translateY(0);
-  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  color: #ffffff;
+  flex-shrink: 0;
+  transition: transform 180ms ease, filter 180ms ease;
 }
 
 .tatvika-social-icon-link:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.24);
+  filter: brightness(1.1);
 }
 
-.tatvika-social-whatsapp {
-  background: #25d366 !important;
+/* ✅ FIX: Added focus-visible ring */
+.tatvika-social-icon-link:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
 }
 
-.tatvika-social-whatsapp:hover {
-  background: #1fb85a !important;
-}
+.tatvika-social-whatsapp  { background: #25d366; }
+.tatvika-social-youtube   { background: #ff0000; }
+/* ✅ FIX: Instagram previously had a gradient but no hover state.
+          Using a solid brand colour so hover filter works uniformly. */
+.tatvika-social-instagram { background: #e1306c; }
+.tatvika-social-telegram  { background: #229ed9; }
 
-.tatvika-social-youtube {
-  background: #ff0000 !important;
-}
-
-.tatvika-social-youtube:hover {
-  background: #d90000 !important;
-}
-
-.tatvika-social-instagram {
-  background: radial-gradient(circle at 30% 107%, #fdf497 0 5%, #fdf497 5% 15%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
-}
-
-.tatvika-social-telegram {
-  background: #229ed9 !important;
-}
-
-.tatvika-social-telegram:hover {
-  background: #1d8bbf !important;
-}
-
+/* ── Account dropdown ──────────────────────────────────────────────────────── */
 .tatvika-account-menu {
   position: fixed;
-  top: 86px;
+  top: calc(var(--ta-header-h) + 12px);
   right: 34px;
   z-index: 90;
   width: min(320px, calc(100vw - 32px));
@@ -144,7 +170,7 @@
   border-radius: 18px;
   background: #ffffff;
   padding: 18px;
-  box-shadow: 0 24px 60px rgba(10, 25, 47, 0.22);
+  box-shadow: 0 20px 50px rgba(10, 25, 47, 0.2);
 }
 
 .tatvika-account-kicker {
@@ -153,11 +179,12 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  margin: 0;
 }
 
 .tatvika-account-user {
-  margin-top: 4px;
-  color: #0369a1;
+  margin: 4px 0 0;
+  color: var(--ta-blue-dark);
   font-size: 18px;
   font-weight: 700;
   word-break: break-word;
@@ -169,6 +196,8 @@
   margin-top: 16px;
 }
 
+/* ── Shared button/link styles ─────────────────────────────────────────────── */
+/* ✅ FIX: Added horizontal padding so text never clips at min-height */
 .tatvika-account-primary,
 .tatvika-account-secondary,
 .tatvika-auth-submit {
@@ -176,35 +205,56 @@
   min-height: 44px;
   align-items: center;
   justify-content: center;
+  padding: 0 20px;
   border-radius: 14px;
+  font-family: inherit;
+  font-size: 15px;
   font-weight: 700;
   text-decoration: none;
+  cursor: pointer;
   transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
 .tatvika-account-primary,
 .tatvika-auth-submit {
-  border: 1px solid #0284c7;
-  background: #0284c7;
+  border: 1px solid var(--ta-blue-dark);
+  background: var(--ta-blue-dark);
   color: #ffffff;
+  width: 100%;
 }
 
 .tatvika-account-primary:hover,
 .tatvika-auth-submit:hover {
-  background: #0369a1;
-  border-color: #0369a1;
+  background: #025e90;
+  border-color: #025e90;
+}
+
+.tatvika-account-primary:focus-visible,
+.tatvika-auth-submit:focus-visible {
+  outline: 2px solid var(--ta-blue-dark);
+  outline-offset: 2px;
 }
 
 .tatvika-account-secondary {
   border: 1px solid #cbd5e1;
   background: #ffffff;
-  color: #0369a1;
+  color: var(--ta-blue-dark);
+  width: 100%;
 }
 
 .tatvika-account-secondary:hover {
-  border-color: #0369a1;
+  border-color: var(--ta-blue-dark);
+  background: #f0f9ff;
 }
 
+.tatvika-account-secondary:focus-visible {
+  outline: 2px solid var(--ta-blue-dark);
+  outline-offset: 2px;
+}
+
+/* ── Auth overlay ──────────────────────────────────────────────────────────── */
+/* ✅ FIX: Backdrop changed from rgba(3,105,161,0.5) (too blue/light) to a
+          neutral dark overlay for proper accessibility contrast. */
 .tatvika-auth-overlay {
   position: fixed;
   inset: 0;
@@ -212,7 +262,7 @@
   display: grid;
   place-items: center;
   padding: 24px;
-  background: rgba(3, 105, 161, 0.5);
+  background: rgba(0, 0, 0, 0.55);
 }
 
 .tatvika-auth-card {
@@ -223,28 +273,32 @@
   border-radius: 24px;
   background: #ffffff;
   padding: 28px;
-  box-shadow: 0 32px 80px rgba(3, 105, 161, 0.28);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
 }
 
+/* ── Body layout ───────────────────────────────────────────────────────────── */
 .tatvika-body {
+  display: flex;
   min-height: 100vh;
-  padding-top: 74px;
+  padding-top: var(--ta-header-h);
 }
 
+/* ── Sidebar ───────────────────────────────────────────────────────────────── */
+/* ✅ FIX: background unified to var(--ta-blue) — previously the CSS used #0284c7
+          while the header inline style forced #0081C9 causing a visible mismatch.
+          backdrop-filter removed: has no effect on a fully-opaque solid element. */
 .tatvika-sidebar {
   position: fixed;
-  top: 74px;
+  top: var(--ta-header-h);
   bottom: 0;
   left: 0;
   z-index: 40;
   display: flex;
   flex-direction: column;
-  width: 240px;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-  background: #0284c7;
-  box-shadow: 8px 0 22px rgba(2, 132, 199, 0.2);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  width: var(--ta-sidebar-w);
+  background: var(--ta-blue);
+  border-right: 1px solid rgba(255, 255, 255, 0.10);
+  overflow-y: auto;
 }
 
 .tatvika-sidebar-brand {
@@ -252,6 +306,12 @@
   justify-content: center;
   padding: 22px 18px 10px;
   text-decoration: none;
+  flex-shrink: 0;
+}
+
+.tatvika-sidebar-brand:focus-visible {
+  outline: 2px solid var(--ta-gold);
+  outline-offset: -4px;
 }
 
 .tatvika-sidebar-logo {
@@ -259,108 +319,312 @@
   height: 138px;
   border-radius: 18px;
   object-fit: cover;
-  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
+/* ── Navigation ────────────────────────────────────────────────────────────── */
 .tatvika-nav {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   flex: 1;
-  margin: 0;
-  padding: 14px 16px 26px;
-  overflow-y: auto;
+  padding: 14px 12px 16px;
 }
 
-.tatvika-sidebar-socials {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 18px;
-}
-
+/* ✅ FIX: Removed conflicting JSX inline color: '#cbd5e1'.
+          Single colour source is now here. Also added color to the
+          transition so it animates alongside background. */
 .tatvika-nav-link {
   display: flex;
   align-items: center;
   width: 100%;
   min-height: 42px;
   padding: 0 12px;
+  border: none;
   border-radius: 8px;
-  color: #e0f2fe;
+  background: transparent;
+  color: #cbd5e1;
+  font-family: inherit;
   font-size: 16px;
   font-weight: 500;
   line-height: 1;
   text-decoration: none;
+  cursor: pointer;
   transition: background 180ms ease, color 180ms ease;
 }
 
 .tatvika-nav-link:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
 }
 
-.tatvika-nav-link-active,
-.tatvika-nav-link-active:hover {
-  background: rgba(255, 255, 255, 0.14) !important;
-  color: #d4af37 !important;
+.tatvika-nav-link:focus-visible {
+  outline: 2px solid var(--ta-gold);
+  outline-offset: -2px;
 }
 
+/* Sub-level nav items */
+.tatvika-nav-sublink {
+  font-size: 14px;
+  padding-left: 24px;
+  justify-content: flex-start;
+}
+
+.tatvika-nav-final-link {
+  font-size: 13px;
+  padding-left: 40px;
+  justify-content: flex-start;
+}
+
+.tatvika-nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 2px;
+}
+
+/* ── Sidebar socials ───────────────────────────────────────────────────────── */
+.tatvika-sidebar-socials {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 16px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+/* ── Main content area ─────────────────────────────────────────────────────── */
 .tatvika-main {
-  min-height: calc(100vh - 74px);
-  margin-left: 240px;
+  flex: 1;
+  min-height: calc(100vh - var(--ta-header-h));
+  margin-left: var(--ta-sidebar-w);
   background: #f8fafc;
-  padding: 52px 56px 80px;
+  padding: 48px 52px 80px;
 }
 
+/* ✅ FIX: Added width: 100% so content doesn't overflow on narrow viewports */
 .tatvika-content {
+  width: 100%;
   max-width: 1160px;
 }
 
+/* ── Product cards ─────────────────────────────────────────────────────────── */
+.tatvika-card-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.tatvika-product-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.tatvika-product-title {
+  margin-bottom: 12px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.tatvika-product-badge {
+  display: inline-block;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  padding: 3px 12px;
+  font-size: 13px;
+  color: #334155;
+  font-weight: 500;
+}
+
+.tatvika-product-class {
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.tatvika-product-price {
+  margin-bottom: 4px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.tatvika-product-actual-price {
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #94a3b8;
+  text-decoration: line-through;
+}
+
+/* ✅ FIX: Inline backgroundColor was overriding class. Now fully in CSS. */
+.tatvika-product-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  border: none;
+  border-radius: 999px;
+  background: var(--ta-cta);
+  padding: 10px 20px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 180ms ease;
+}
+
+.tatvika-product-cta:hover {
+  background: #0f2a58;
+}
+
+.tatvika-product-cta:focus-visible {
+  outline: 2px solid var(--ta-cta);
+  outline-offset: 2px;
+}
+
+/* ── Coming soon / loading states ──────────────────────────────────────────── */
+.tatvika-coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  color: #94a3b8;
+}
+
+.tatvika-coming-soon h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.tatvika-coming-soon p {
+  margin: 0;
+  font-size: 15px;
+}
+
+.tatvika-page-loading {
+  padding: 48px;
+  color: #94a3b8;
+  font-size: 15px;
+}
+
+/* ── Responsive — tablet (≤ 900px) ────────────────────────────────────────── */
 @media (max-width: 900px) {
   .tatvika-header {
-    padding: 0 18px;
+    padding: 0 16px;
   }
 
-  .tatvika-header-spacer {
-    display: none;
-  }
+  .tatvika-brand { font-size: 20px; }
 
-  .tatvika-brand {
-    font-size: 20px;
-  }
+  /* ✅ FIX: Social pill hidden on mobile — was already there, kept */
+  .tatvika-header-socials { display: none; }
 
   .tatvika-portal-link {
     min-width: auto;
-    padding: 0 12px;
+    padding: 0 14px;
     font-size: 13px;
   }
 
-  .tatvika-header-socials {
-    display: none;
+  /* ✅ FIX: Sidebar becomes a sticky top-of-page horizontal nav on mobile.
+            It is no longer position:fixed so the body flow is maintained.
+            The horizontal scroll handles overflow of many items. */
+  .tatvika-body {
+    flex-direction: column;
   }
 
   .tatvika-sidebar {
-    position: static;
+    position: sticky;
+    top: var(--ta-header-h);
     width: 100%;
+    height: auto;
+    flex-direction: column;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
   }
 
-  .tatvika-body {
-    display: block;
-  }
+  .tatvika-sidebar-brand { display: none; }
 
   .tatvika-nav {
     flex-direction: row;
-    gap: 6px;
+    flex-wrap: nowrap;
     overflow-x: auto;
-    padding: 12px;
+    padding: 10px 12px;
+    gap: 6px;
+    /* Hide scrollbar but keep functionality */
+    scrollbar-width: none;
   }
+  .tatvika-nav::-webkit-scrollbar { display: none; }
 
   .tatvika-nav-link {
     width: auto;
     min-width: max-content;
-    font-size: 15px;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+
+  /* Sub-menus not shown in mobile horizontal mode */
+  .tatvika-nav-group { display: none; }
+
+  .tatvika-sidebar-socials { display: none; }
+
+  .tatvika-main {
+    margin-left: 0;
+    padding: 24px 16px 52px;
+  }
+
+  .tatvika-account-menu {
+    right: 16px;
+  }
+}
+
+/* ── Responsive — small phones (≤ 400px) ──────────────────────────────────── */
+/* ✅ FIX: New breakpoint for very small screens that was missing entirely */
+@media (max-width: 400px) {
+  .tatvika-brand { font-size: 17px; }
+
+  .tatvika-portal-link {
+    min-width: auto;
+    padding: 0 10px;
+    font-size: 12px;
+    min-height: 36px;
+  }
+
+  .tatvika-auth-card { padding: 20px 16px; }
+
+  .tatvika-main { padding: 20px 12px 40px; }
+
+  .tatvika-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Print ─────────────────────────────────────────────────────────────────── */
+/* ✅ FIX: Added basic print styles so the header/sidebar don't waste paper */
+@media print {
+  .tatvika-header,
+  .tatvika-sidebar,
+  .tatvika-auth-overlay,
+  .tatvika-account-menu {
+    display: none !important;
   }
 
   .tatvika-main {
     margin-left: 0;
-    padding: 28px 18px 52px;
+    padding: 0;
+  }
+
+  .tatvika-body {
+    padding-top: 0;
   }
 }
