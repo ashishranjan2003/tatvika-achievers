@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const API_BASE = 'http://127.0.0.1:8000/api/v1/admin'
+const API_BASE = `${(import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/v1').replace(/\/$/, '')}/admin`
 const ADMIN_TOKEN = import.meta.env.VITE_ADMIN_API_TOKEN || localStorage.getItem('tatvika-admin-token') || ''
 
 type SectionStatus = 'active' | 'empty' | 'coming_soon'
@@ -36,11 +36,11 @@ async function parseResponse(response: Response) {
 }
 
 export default function AdminPanel() {
-  const [sectionId, setSectionId] = useState('courses-academic')
-  const [menuLabel, setMenuLabel] = useState('Courses')
+  const [sectionId, setSectionId] = useState('lectures-academic')
+  const [menuLabel, setMenuLabel] = useState('Lectures')
   const [routePath, setRoutePath] = useState('/courses')
   const [currentStatus, setCurrentStatus] = useState<SectionStatus>('active')
-  const [title, setTitle] = useState('Popular Courses')
+  const [title, setTitle] = useState('Academic lectures')
   const [subtitle, setSubtitle] = useState('Fresh study materials curated for the current batch.')
   const [message, setMessage] = useState('No course cards are live right now.')
   const [guidance, setGuidance] = useState('Add cards from the admin panel to publish this section.')
@@ -48,7 +48,7 @@ export default function AdminPanel() {
   const [subheading, setSubheading] = useState('This section will launch after the next content review.')
   const [previewItems, setPreviewItems] = useState('Mock Test, Notes Pack')
   const [ctaLabel, setCtaLabel] = useState('Notify me when live')
-  const [cards, setCards] = useState('[{"id":"course-1","title":"Accountancy Basics","subject":"Accounts","price":"₹450"}]')
+  const [cards, setCards] = useState('[{"id":"lecture-1","title":"Accountancy Basics","subject":"Accounts","price":"₹450","duration":90,"action_url":"/purchase?item=lecture-1","action_label":"View"}]')
   const [filters, setFilters] = useState('Accounts,Economics')
   const [statusMessage, setStatusMessage] = useState('')
   const [loading, setLoading] = useState(false)

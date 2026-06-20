@@ -32,6 +32,7 @@ const Signup      = lazy(() => import('./pages/Signup'))
 const Purchase    = lazy(() => import('./pages/Purchase'))
 const Dashboard   = lazy(() => import('./pages/Dashboard'))
 const Contact     = lazy(() => import('./pages/Contact'))
+const AdminPanel  = lazy(() => import('./pages/AdminPanel'))
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -677,6 +678,7 @@ function AppShell() {
                   <Route path="/login"     element={<Login />}        />
                   <Route path="/signup"    element={<Signup />}       />
                   <Route path="/purchase"  element={<Purchase />}     />
+                  <Route path="/admin"     element={<AdminPanel />}   />
                   {/* ✅ FIX: /dashboard is protected — redirects to /login if not authed */}
                   <Route
                     path="/dashboard"

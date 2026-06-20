@@ -12,11 +12,18 @@ class BaseCard(BaseModel):
     id: RequiredText
     title: RequiredText
     subject: RequiredText
+    description: OptionalText | None = None
     price: OptionalText | None = None
     actual_price: OptionalText | None = None
     class_section: OptionalText | None = None
+    size: OptionalText | None = None
     questions: int | None = Field(default=None, ge=0, le=1000)
     duration: int | None = Field(default=None, ge=0, le=1000)
+    action_label: OptionalText | None = None
+    action_url: OptionalText | None = None
+    preview_url: OptionalText | None = None
+    download_url: OptionalText | None = None
+    tags: list[RequiredText] = Field(default_factory=list, max_length=10)
 
 
 class ActiveSectionLayout(BaseModel):
