@@ -408,6 +408,185 @@
   max-width: 1160px;
 }
 
+/* ── Section shell / breadcrumbs / filters ───────────────────────────────── */
+.tatvika-section-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tatvika-breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.tatvika-breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tatvika-breadcrumb-separator {
+  color: #cbd5e1;
+}
+
+.tatvika-breadcrumb-label {
+  color: #334155;
+}
+
+.tatvika-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tatvika-section-kicker {
+  margin: 0 0 4px;
+  color: #D4AF37;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.tatvika-section-title {
+  margin: 0;
+  color: #0f172a;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.tatvika-section-count {
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tatvika-class-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tatvika-class-pill {
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #334155;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+
+.tatvika-class-pill:hover,
+.tatvika-class-pill.active {
+  background: #0A192F;
+  border-color: #0A192F;
+  color: #ffffff;
+}
+
+.tatvika-guided-empty-state {
+  display: grid;
+  gap: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffffff, #f8fbff);
+  padding: 20px;
+  box-shadow: 0 10px 35px rgba(15, 23, 42, 0.08);
+}
+
+.tatvika-guided-empty-state h3 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 20px;
+}
+
+.tatvika-guided-empty-state p,
+.tatvika-guided-empty-state li {
+  color: #475569;
+  font-size: 14px;
+}
+
+.tatvika-guided-empty-state ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+/* ── Test Series layout ───────────────────────────────────────────────────── */
+.tatvika-test-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tatvika-test-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 16px 18px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.tatvika-test-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #eff6ff, #fef3c7);
+  font-size: 24px;
+}
+
+.tatvika-test-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tatvika-test-title {
+  margin: 0;
+  color: #0f172a;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.tatvika-test-meta {
+  margin: 0;
+  color: #475569;
+  font-size: 14px;
+}
+
+.tatvika-test-action {
+  border: none;
+  border-radius: 999px;
+  background: #0A192F;
+  color: #ffffff;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 /* ── Product cards ─────────────────────────────────────────────────────────── */
 .tatvika-card-grid {
   display: grid;
@@ -488,6 +667,98 @@
 .tatvika-product-cta:focus-visible {
   outline: 2px solid var(--ta-cta);
   outline-offset: 2px;
+}
+
+/* ── Professional launch card ─────────────────────────────────────────────── */
+.tatvika-professional-launch-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 66vh;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fbff 100%);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  padding: 32px;
+  text-align: center;
+}
+
+.tatvika-professional-icon-wrap {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #dbeafe, #eff6ff);
+  font-size: 32px;
+  margin-bottom: 14px;
+}
+
+.tatvika-professional-kicker {
+  margin: 0 0 8px;
+  color: #2563eb;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tatvika-professional-title {
+  margin: 0 0 10px;
+  color: #0f172a;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.tatvika-professional-copy {
+  max-width: 640px;
+  margin: 0 0 16px;
+  color: #475569;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.tatvika-professional-preview-list {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.tatvika-professional-preview-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #334155;
+  font-size: 14px;
+}
+
+.tatvika-professional-preview-list li::before {
+  content: '✓';
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tatvika-professional-cta {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #0A192F, #1d4ed8);
+  color: #ffffff;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 /* ── Coming soon / loading states ──────────────────────────────────────────── */

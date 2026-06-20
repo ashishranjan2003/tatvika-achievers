@@ -33,6 +33,7 @@ const Signup      = lazy(() => import('./pages/Signup'))
 const Purchase    = lazy(() => import('./pages/Purchase'))
 const Dashboard   = lazy(() => import('./pages/Dashboard'))
 const Contact     = lazy(() => import('./pages/Contact'))
+const AdminPanel  = lazy(() => import('./pages/AdminPanel'))
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -45,6 +46,15 @@ type DynamicItem = {
   subject: 'Accounts' | 'Business Studies' | 'Economics'
   price: string
   actualPrice?: string
+}
+
+type TestSeriesItem = {
+  id: string
+  title: string
+  subject: 'Accounts' | 'Economics'
+  questions: number
+  duration: number
+  level: 'Foundation' | 'Advanced'
 }
 
 type AuthUser = {
@@ -149,6 +159,12 @@ const dynamicLectures: DynamicItem[] = [
   { id: 'lecture-3', title: 'Economics Review Workshop',    classSection: '12th Class', subject: 'Economics',        price: '₹6,000', actualPrice: '₹9,000' },
 ]
 
+const dynamicTestSeries: TestSeriesItem[] = [
+  { id: 'test-1', title: 'Accountancy Full Mock — 11th', subject: 'Accounts', questions: 50, duration: 90, level: 'Foundation' },
+  { id: 'test-2', title: 'Economics Practice Sprint',     subject: 'Economics', questions: 40, duration: 75, level: 'Advanced' },
+  { id: 'test-3', title: 'Business Studies Weekly Quiz',  subject: 'Accounts', questions: 30, duration: 45, level: 'Foundation' },
+]
+
 // ─── ProtectedRoute ───────────────────────────────────────────────────────────
 
 // ✅ FIX: Unauthenticated users are redirected to /login instead of being
@@ -184,6 +200,7 @@ function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
   // Reset internal state when modal closes so it's fresh next open
   useEffect(() => {
     if (!isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setAuthMethod('email')
       setIsOtpSent(false)
       setGeneratedOtp('')
@@ -382,6 +399,7 @@ function AppShell() {
 
   const [expandedMenu,    setExpandedMenu]    = useState<Record<string, boolean>>({})
   const [expandedSubMenu, setExpandedSubMenu] = useState<Record<string, boolean>>({})
+  const [selectedSubject, setSelectedSubject] = useState('All subjects')
 
   const [isAuthModalOpen,   setIsAuthModalOpen]   = useState(false)
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
@@ -400,9 +418,15 @@ function AppShell() {
   useEffect(() => {
     if (!activeSection) return
     const [menuKey, sectionLabel] = activeSection.split('-')
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (menuKey) setExpandedMenu((p) => ({ ...p, [menuKey]: true }))
     if (menuKey && sectionLabel)
       setExpandedSubMenu((p) => ({ ...p, [`${menuKey}-${sectionLabel}`]: true }))
+  }, [activeSection])
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSelectedSubject('All subjects')
   }, [activeSection])
 
   // ✅ FIX: useCallback prevents unnecessary re-creation of handlers each render
@@ -452,10 +476,46 @@ function AppShell() {
     return source.filter((item) => item.classSection === cls)
   }
 
+  const getBreadcrumbs = () => {
+    const parts = activeSection.split('-')
+    const crumbs = parts.filter(Boolean)
+
+    if (crumbs.length === 0) return []
+
+    const breadcrumbLabels = crumbs.map((part, index) => {
+      if (index === 0) return currentRouteLabel || part
+      if (index === 1) return part
+      return part.replace(' Class', ' class')
+    })
+
+    return breadcrumbLabels
+  }
+
+  const getClassOptions = () => {
+    if (currentRouteLabel !== 'Lectures' && currentRouteLabel !== 'Book') return []
+
+    return (
+      nestedMenuSections[currentRouteLabel]?.find((section) => section.label === 'Academic')?.targets ?? []
+    )
+  }
+
   const isProfessionalTarget =
     /^(Book|Lectures|Test Series)-Professional/.test(activeSection)
   const academicItems   = getAcademicItems()
-  const isViewingSubPage = isProfessionalTarget || !!academicItems
+  const testSeriesItems = activeSection === 'Test Series-Academic' ? dynamicTestSeries : null
+  const classOptions     = getClassOptions()
+  const breadcrumbs      = getBreadcrumbs()
+  const selectedClass    = academicItems?.[0]?.classSection ?? null
+  const selectedClassLabel = selectedClass ? selectedClass.replace(' Class', ' class') : 'Academic'
+  const itemCountLabel = academicItems ? `${academicItems.length} ${academicItems.length === 1 ? 'course' : 'courses'}` : '0 courses'
+  const isLecturesAcademicPath = currentRouteLabel === 'Lectures' && activeSection.startsWith('Lectures-Academic')
+  const needsGuidedEmptyState = Boolean(activeSection) && !isProfessionalTarget && !academicItems
+  const isViewingSubPage = isProfessionalTarget || !!academicItems || !!testSeriesItems || needsGuidedEmptyState
+
+  const visibleTestSeriesItems =
+    selectedSubject === 'All subjects'
+      ? testSeriesItems ?? []
+      : (testSeriesItems ?? []).filter((item) => item.subject === selectedSubject)
 
   return (
     // ✅ FIX: Single font-family declaration via CSS class — inline style removed
@@ -651,27 +711,180 @@ function AppShell() {
           <div className="tatvika-content">
             {isViewingSubPage ? (
               isProfessionalTarget ? (
-                <div className="tatvika-coming-soon">
-                  <h2>Coming soon…</h2>
-                  <p>This professional section is under construction.</p>
-                </div>
+                <section className="tatvika-professional-launch-card" aria-label="Professional courses launching soon">
+                  <div className="tatvika-professional-icon-wrap" aria-hidden="true">🎓</div>
+                  <p className="tatvika-professional-kicker">Coming soon</p>
+                  <h2 className="tatvika-professional-title">Professional courses launching soon</h2>
+                  <p className="tatvika-professional-copy">
+                    Foundation &amp; Post-Foundation content is being prepared for launch with structured lectures,
+                    notes, and mock test support.
+                  </p>
+                  <ul className="tatvika-professional-preview-list">
+                    <li>Foundation level notes &amp; lectures</li>
+                    <li>Post-Foundation exam prep packs</li>
+                    <li>Mock test series</li>
+                  </ul>
+                  <button type="button" className="tatvika-professional-cta">
+                    🔔 Notify me when live
+                  </button>
+                </section>
               ) : academicItems && academicItems.length > 0 ? (
-                <div className="tatvika-card-grid">
-                  {academicItems.map((item) => (
-                    <div key={item.id} className="tatvika-product-card">
-                      <div className="tatvika-product-title">{item.title}</div>
-                      <span className="tatvika-product-badge">{item.subject}</span>
-                      <div className="tatvika-product-class">{item.classSection}</div>
-                      <div className="tatvika-product-price">{item.price}</div>
-                      {item.actualPrice && (
-                        <div className="tatvika-product-actual-price">{item.actualPrice}</div>
-                      )}
-                      <button type="button" className="tatvika-product-cta">
-                        View Premium
-                      </button>
+                <section className="tatvika-section-shell">
+                  <nav className="tatvika-breadcrumbs" aria-label="Breadcrumb">
+                    {breadcrumbs.map((crumb, index) => (
+                      <span key={`${crumb}-${index}`} className="tatvika-breadcrumb-item">
+                        {index > 0 && <span className="tatvika-breadcrumb-separator">/</span>}
+                        <span className="tatvika-breadcrumb-label">{crumb}</span>
+                      </span>
+                    ))}
+                  </nav>
+
+                  <header className="tatvika-section-header">
+                    <div>
+                      <p className="tatvika-section-kicker">Current selection</p>
+                      <h2 className="tatvika-section-title">{selectedClassLabel} lectures ({itemCountLabel})</h2>
                     </div>
-                  ))}
-                </div>
+                    <span className="tatvika-section-count">{itemCountLabel}</span>
+                  </header>
+
+                  {isLecturesAcademicPath && classOptions.length > 0 && (
+                    <div className="tatvika-class-pills" role="tablist" aria-label="Choose class">
+                      {classOptions.map((option) => {
+                        const optionKey = `Lectures-Academic-${option}`
+                        const isActive = activeSection === optionKey
+
+                        return (
+                          <button
+                            key={option}
+                            type="button"
+                            role="tab"
+                            aria-selected={isActive}
+                            className={`tatvika-class-pill ${isActive ? 'active' : ''}`}
+                            onClick={() => navigate(`${location.pathname}?section=${encodeURIComponent(optionKey)}`)}
+                          >
+                            {option.replace(' Class', ' class')}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  )}
+
+                  <div className="tatvika-card-grid">
+                    {academicItems.map((item) => (
+                      <article key={item.id} className="tatvika-product-card">
+                        <div className="tatvika-product-title">{item.title}</div>
+                        <span className="tatvika-product-badge">{item.subject}</span>
+                        <div className="tatvika-product-class">{item.classSection}</div>
+                        <div className="tatvika-product-price">{item.price}</div>
+                        {item.actualPrice && (
+                          <div className="tatvika-product-actual-price">{item.actualPrice}</div>
+                        )}
+                        <button type="button" className="tatvika-product-cta">
+                          View Premium
+                        </button>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              ) : testSeriesItems && testSeriesItems.length > 0 ? (
+                <section className="tatvika-section-shell">
+                  <nav className="tatvika-breadcrumbs" aria-label="Breadcrumb">
+                    {breadcrumbs.map((crumb, index) => (
+                      <span key={`${crumb}-${index}`} className="tatvika-breadcrumb-item">
+                        {index > 0 && <span className="tatvika-breadcrumb-separator">/</span>}
+                        <span className="tatvika-breadcrumb-label">{crumb}</span>
+                      </span>
+                    ))}
+                  </nav>
+
+                  <header className="tatvika-section-header">
+                    <div>
+                      <p className="tatvika-section-kicker">Current selection</p>
+                      <h2 className="tatvika-section-title">Academic test series ({visibleTestSeriesItems.length} tests)</h2>
+                    </div>
+                    <span className="tatvika-section-count">{visibleTestSeriesItems.length} tests</span>
+                  </header>
+
+                  <div className="tatvika-class-pills" role="tablist" aria-label="Filter test subjects">
+                    {['All subjects', 'Accounts', 'Economics'].map((subject) => (
+                      <button
+                        key={subject}
+                        type="button"
+                        role="tab"
+                        aria-selected={selectedSubject === subject}
+                        className={`tatvika-class-pill ${selectedSubject === subject ? 'active' : ''}`}
+                        onClick={() => setSelectedSubject(subject)}
+                      >
+                        {subject}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="tatvika-test-grid">
+                    {visibleTestSeriesItems.map((item) => (
+                      <article key={item.id} className="tatvika-test-card">
+                        <div className="tatvika-test-icon" aria-hidden="true">📝</div>
+                        <div className="tatvika-test-copy">
+                          <h3 className="tatvika-test-title">{item.title}</h3>
+                          <p className="tatvika-test-meta">{item.questions} questions · {item.duration} min · {item.subject}</p>
+                        </div>
+                        <button type="button" className="tatvika-test-action">Start</button>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              ) : needsGuidedEmptyState ? (
+                <section className="tatvika-section-shell">
+                  <nav className="tatvika-breadcrumbs" aria-label="Breadcrumb">
+                    {breadcrumbs.length > 0 ? breadcrumbs.map((crumb, index) => (
+                      <span key={`${crumb}-${index}`} className="tatvika-breadcrumb-item">
+                        {index > 0 && <span className="tatvika-breadcrumb-separator">/</span>}
+                        <span className="tatvika-breadcrumb-label">{crumb}</span>
+                      </span>
+                    )) : (
+                      <span className="tatvika-breadcrumb-item">
+                        <span className="tatvika-breadcrumb-label">Lectures</span>
+                      </span>
+                    )}
+                  </nav>
+
+                  <header className="tatvika-section-header">
+                    <div>
+                      <p className="tatvika-section-kicker">Guided state</p>
+                      <h2 className="tatvika-section-title">Choose a class to unlock lecture cards</h2>
+                    </div>
+                    <span className="tatvika-section-count">0 courses</span>
+                  </header>
+
+                  {isLecturesAcademicPath && classOptions.length > 0 && (
+                    <div className="tatvika-class-pills" role="tablist" aria-label="Choose class">
+                      {classOptions.map((option) => {
+                        const optionKey = `Lectures-Academic-${option}`
+
+                        return (
+                          <button
+                            key={option}
+                            type="button"
+                            role="tab"
+                            className="tatvika-class-pill"
+                            onClick={() => navigate(`${location.pathname}?section=${encodeURIComponent(optionKey)}`)}
+                          >
+                            {option.replace(' Class', ' class')}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  )}
+
+                  <div className="tatvika-guided-empty-state">
+                    <h3>Pick a class track first</h3>
+                    <p>Select a class pill below to open the matching lectures for this section.</p>
+                    <ul>
+                      <li>Use the class tabs to switch between the available lecture collections.</li>
+                      <li>This prevents the page from showing broken or partial content while no cards are selected yet.</li>
+                    </ul>
+                  </div>
+                </section>
               ) : (
                 // Guard: section param exists but no matching items
                 <div className="tatvika-coming-soon">
@@ -700,6 +913,7 @@ function AppShell() {
                       </ProtectedRoute>
                     }
                   />
+                  <Route path="/admin"     element={<AdminPanel />}    />
                   <Route path="/contact"   element={<Contact />}      />
                   {/* Catch-all */}
                   <Route path="*" element={<Navigate to="/" replace />} />

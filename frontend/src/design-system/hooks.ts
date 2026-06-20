@@ -6,6 +6,10 @@
 import React, { useMemo } from 'react';
 import { colors, typography, spacing } from './tokens';
 
+interface TokenTree {
+  [key: string]: string | TokenTree;
+}
+
 /**
  * Hook to get themed colors based on current theme
  * @param {string} colorKey - Key from colors object (e.g., 'primary.navy', 'gold.premium')
@@ -14,13 +18,13 @@ import { colors, typography, spacing } from './tokens';
 export const useThemedColor = (colorKey: string): string => {
   return useMemo(() => {
     const keys = colorKey.split('.');
-    let result: any = colors;
+    let result: string | TokenTree | undefined = colors as TokenTree;
     
     for (const key of keys) {
-      result = result?.[key];
+      result = typeof result === 'object' ? result[key] : undefined;
     }
     
-    return result || colors.primary.navy;
+    return typeof result === 'string' ? result : colors.primary.navy;
   }, [colorKey]);
 };
 
@@ -56,26 +60,22 @@ export const useBreakpoints = () => {
 export const useMediaQuery = (breakpoint: string): boolean => {
   const breakpoints = useBreakpoints();
   const size = breakpoints[breakpoint as keyof typeof breakpoints];
-  
-  if (!size) return false;
-
-  // Client-side only
-  if (typeof window === 'undefined') return false;
-
-  const [matches, setMatches] = React.useState(false);
+  const getInitialMatches = () => (
+    Boolean(size) && typeof window !== 'undefined'
+      ? window.matchMedia(`(min-width: ${size})`).matches
+      : false
+  );
+  const [matches, setMatches] = React.useState(getInitialMatches);
 
   React.useEffect(() => {
-    const media = window.matchMedia(`(min-width: ${size})`);
-    
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
+    if (!size || typeof window === 'undefined') return undefined;
 
+    const media = window.matchMedia(`(min-width: ${size})`);
     const listener = () => setMatches(media.matches);
     
     media.addEventListener('change', listener);
     return () => media.removeEventListener('change', listener);
-  }, [matches, size]);
+  }, [size]);
 
   return matches;
 };

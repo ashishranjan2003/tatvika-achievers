@@ -159,7 +159,7 @@ export function TestSeriesPageExample() {
           {['all', 'beginner', 'advanced'].map((level) => (
             <button
               key={level}
-              onClick={() => setDifficulty(level as any)}
+              onClick={() => setDifficulty(level as 'all' | 'beginner' | 'advanced')}
               className={`btn ${
                 difficulty === level
                   ? 'btn-primary'
