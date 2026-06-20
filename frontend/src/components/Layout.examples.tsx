@@ -135,7 +135,9 @@ export function NotesPageExample() {
  * EXAMPLE 4: Test Series Page with Filters
  */
 export function TestSeriesPageExample() {
-  const [difficulty, setDifficulty] = React.useState<'all' | 'beginner' | 'advanced'>('all');
+  type Difficulty = 'all' | 'beginner' | 'advanced';
+
+  const [difficulty, setDifficulty] = React.useState<Difficulty>('all');
 
   const tests = [
     { id: 1, title: 'Mock Test 1', difficulty: 'beginner', questions: 50, time: 60 },
@@ -156,10 +158,10 @@ export function TestSeriesPageExample() {
 
         {/* Filters */}
         <div className="mb-8 flex gap-4">
-          {['all', 'beginner', 'advanced'].map((level) => (
+          {(['all', 'beginner', 'advanced'] as Difficulty[]).map((level) => (
             <button
               key={level}
-              onClick={() => setDifficulty(level as 'all' | 'beginner' | 'advanced')}
+              onClick={() => setDifficulty(level)}
               className={`btn ${
                 difficulty === level
                   ? 'btn-primary'

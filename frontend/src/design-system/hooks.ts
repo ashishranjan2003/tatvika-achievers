@@ -6,9 +6,8 @@
 import React, { useMemo } from 'react';
 import { colors, typography, spacing } from './tokens';
 
-interface TokenTree {
-  [key: string]: string | TokenTree;
-}
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === 'object' && value !== null;
 
 /**
  * Hook to get themed colors based on current theme
@@ -18,10 +17,10 @@ interface TokenTree {
 export const useThemedColor = (colorKey: string): string => {
   return useMemo(() => {
     const keys = colorKey.split('.');
-    let result: string | TokenTree | undefined = colors as TokenTree;
+    let result: unknown = colors;
     
     for (const key of keys) {
-      result = typeof result === 'object' ? result[key] : undefined;
+      result = isRecord(result) ? result[key] : undefined;
     }
     
     return typeof result === 'string' ? result : colors.primary.navy;
@@ -60,16 +59,14 @@ export const useBreakpoints = () => {
 export const useMediaQuery = (breakpoint: string): boolean => {
   const breakpoints = useBreakpoints();
   const size = breakpoints[breakpoint as keyof typeof breakpoints];
-  const getInitialMatches = () => (
-    Boolean(size) && typeof window !== 'undefined'
-      ? window.matchMedia(`(min-width: ${size})`).matches
-      : false
-  );
-  const [matches, setMatches] = React.useState(getInitialMatches);
+
+  const [matches, setMatches] = React.useState(() => {
+    if (!size || typeof window === 'undefined') return false;
+    return window.matchMedia(`(min-width: ${size})`).matches;
+  });
 
   React.useEffect(() => {
-    if (!size || typeof window === 'undefined') return undefined;
-
+    if (!size || typeof window === 'undefined') return;
     const media = window.matchMedia(`(min-width: ${size})`);
     const listener = () => setMatches(media.matches);
     
