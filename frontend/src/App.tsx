@@ -6,7 +6,6 @@ import {
   Routes,
   Navigate,
   useNavigate,
-  useLocation,
   useSearchParams,
 } from 'react-router-dom'
 import {
@@ -173,23 +172,21 @@ function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
   const [generatedOtp, setGeneratedOtp] = useState('')
   const [authError, setAuthError]       = useState('')
 
+  const resetAndClose = useCallback(() => {
+    setAuthMethod('email')
+    setIsOtpSent(false)
+    setGeneratedOtp('')
+    setAuthError('')
+    onClose()
+  }, [onClose])
+
   // ✅ FIX: Keyboard accessibility — Escape closes the modal
   useEffect(() => {
     if (!isOpen) return
-    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') resetAndClose() }
     document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
-  }, [isOpen, onClose])
-
-  // Reset internal state when modal closes so it's fresh next open
-  useEffect(() => {
-    if (!isOpen) {
-      setAuthMethod('email')
-      setIsOtpSent(false)
-      setGeneratedOtp('')
-      setAuthError('')
-    }
-  }, [isOpen])
+  }, [isOpen, resetAndClose])
 
   if (!isOpen) return null
 
@@ -204,7 +201,7 @@ function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
       return
     }
     onSuccess({ label: email, method: 'email' })
-    onClose()
+    resetAndClose()
   }
 
   const handlePhoneSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -237,9 +234,7 @@ function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
     }
 
     onSuccess({ label: `${countryCode} ${phone}`, method: 'phone' })
-    setIsOtpSent(false)
-    setGeneratedOtp('')
-    onClose()
+    resetAndClose()
   }
 
   return (
@@ -249,7 +244,7 @@ function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="student-portal-title"
-      onMouseDown={onClose}
+      onMouseDown={resetAndClose}
     >
       <section
         className="tatvika-auth-card"
@@ -263,7 +258,7 @@ function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
           </div>
           <button
             type="button"
-            onClick={onClose}
+            onClick={resetAndClose}
             className="rounded-full border border-slate-200 px-3 py-1 text-sm font-semibold text-[#0A192F] transition-colors hover:border-[#0A192F]"
           >
             Close
@@ -372,7 +367,6 @@ function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
 
 function AppShell() {
   const navigate       = useNavigate()
-  const location       = useLocation()
   const [searchParams, setSearchParams] = useSearchParams()
 
   // ✅ FIX: Sub-page navigation is URL-driven — browser back/forward and deep
@@ -396,14 +390,9 @@ function AppShell() {
     }
   })
 
-  // Sync expanded state from URL on first load / back-forward navigation
-  useEffect(() => {
-    if (!activeSection) return
-    const [menuKey, sectionLabel] = activeSection.split('-')
-    if (menuKey) setExpandedMenu((p) => ({ ...p, [menuKey]: true }))
-    if (menuKey && sectionLabel)
-      setExpandedSubMenu((p) => ({ ...p, [`${menuKey}-${sectionLabel}`]: true }))
-  }, [activeSection])
+  const [activeMenuKey, activeSectionLabel] = activeSection.split('-')
+  const activeSubMenuKey =
+    activeMenuKey && activeSectionLabel ? `${activeMenuKey}-${activeSectionLabel}` : ''
 
   // ✅ FIX: useCallback prevents unnecessary re-creation of handlers each render
   const toggleExpandedMenu = useCallback((label: string) => {
@@ -440,9 +429,6 @@ function AppShell() {
     setIsAccountMenuOpen(false)
     setIsAuthModalOpen(false)
   }, [])
-
-  // Derive which content panel to show from the current URL + section param
-  const currentRouteLabel = navItems.find((n) => n.href === location.pathname)?.label ?? ''
 
   const getAcademicItems = (): DynamicItem[] | null => {
     const match = activeSection.match(/^(Book|Lectures)-Academic-(11th Class|12th Class)$/)
@@ -572,7 +558,7 @@ function AppShell() {
                     {item.label}
                   </NavLink>
 
-                  {expandedMenu[menuKey] && (
+                  {(expandedMenu[menuKey] || activeMenuKey === menuKey) && (
                     <div className="tatvika-nav-group">
                       {(nestedMenuSections[item.label] ?? []).map((section) => {
                         const sectionKey = `${menuKey}-${section.label}`
@@ -594,7 +580,7 @@ function AppShell() {
                               {section.label}
                             </button>
 
-                            {section.targets && expandedSubMenu[sectionKey] && (
+                            {section.targets && (expandedSubMenu[sectionKey] || activeSubMenuKey === sectionKey) && (
                               <div className="tatvika-nav-group">
                                 {section.targets.map((target) => {
                                   const targetKey = `${sectionKey}-${target}`

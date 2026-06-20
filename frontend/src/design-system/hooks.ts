@@ -6,6 +6,9 @@
 import React, { useMemo } from 'react';
 import { colors, typography, spacing } from './tokens';
 
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === 'object' && value !== null;
+
 /**
  * Hook to get themed colors based on current theme
  * @param {string} colorKey - Key from colors object (e.g., 'primary.navy', 'gold.premium')
@@ -14,13 +17,13 @@ import { colors, typography, spacing } from './tokens';
 export const useThemedColor = (colorKey: string): string => {
   return useMemo(() => {
     const keys = colorKey.split('.');
-    let result: any = colors;
+    let result: unknown = colors;
     
     for (const key of keys) {
-      result = result?.[key];
+      result = isRecord(result) ? result[key] : undefined;
     }
     
-    return result || colors.primary.navy;
+    return typeof result === 'string' ? result : colors.primary.navy;
   }, [colorKey]);
 };
 
@@ -56,26 +59,20 @@ export const useBreakpoints = () => {
 export const useMediaQuery = (breakpoint: string): boolean => {
   const breakpoints = useBreakpoints();
   const size = breakpoints[breakpoint as keyof typeof breakpoints];
-  
-  if (!size) return false;
 
-  // Client-side only
-  if (typeof window === 'undefined') return false;
-
-  const [matches, setMatches] = React.useState(false);
+  const [matches, setMatches] = React.useState(() => {
+    if (!size || typeof window === 'undefined') return false;
+    return window.matchMedia(`(min-width: ${size})`).matches;
+  });
 
   React.useEffect(() => {
+    if (!size || typeof window === 'undefined') return;
     const media = window.matchMedia(`(min-width: ${size})`);
-    
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
-
     const listener = () => setMatches(media.matches);
     
     media.addEventListener('change', listener);
     return () => media.removeEventListener('change', listener);
-  }, [matches, size]);
+  }, [size]);
 
   return matches;
 };
