@@ -32,6 +32,7 @@ const Signup      = lazy(() => import('./pages/Signup'))
 const Purchase    = lazy(() => import('./pages/Purchase'))
 const Dashboard   = lazy(() => import('./pages/Dashboard'))
 const Contact     = lazy(() => import('./pages/Contact'))
+const ComingSoon  = lazy(() => import('./pages/ComingSoon'))
 const AdminPanel  = lazy(() => import('./pages/AdminPanel'))
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -688,6 +689,7 @@ function AppShell() {
                       </ProtectedRoute>
                     }
                   />
+                  <Route path="/coming-soon" element={<ComingSoon />} />
                   <Route path="/contact"   element={<Contact />}      />
                   {/* Catch-all */}
                   <Route path="*" element={<Navigate to="/" replace />} />

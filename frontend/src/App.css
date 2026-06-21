@@ -760,28 +760,118 @@
   font-weight: 700;
   cursor: pointer;
 }
-
 /* ── Coming soon / loading states ──────────────────────────────────────────── */
 .tatvika-coming-soon {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 60vh;
+  min-height: 70vh; /* Increased slightly for better breathing room */
   text-align: center;
-  color: #94a3b8;
+  color: #0a192f;
+  background: #ffffff; /* Clean, pure white background as requested */
+  padding: 6rem 2rem;  /* Generous vertical spacing, no box padding needed */
 }
 
-.tatvika-coming-soon h2 {
-  margin: 0 0 8px;
-  font-size: 28px;
-  font-weight: 600;
-  color: #64748b;
+.tatvika-coming-soon-card {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 2rem;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  padding: 3.5rem 2.25rem;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
 }
 
-.tatvika-coming-soon p {
+.tatvika-coming-soon-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 2rem;
+  border-radius: 1.25rem;
+  background: #f8fafc;
+}
+
+.tatvika-coming-soon-icon-svg {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.tatvika-coming-soon-title {
   margin: 0;
-  font-size: 15px;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #0a192f;
+  letter-spacing: -0.02em;
+}
+
+.tatvika-coming-soon-copy {
+  margin: 0 auto;      /* Centered max-width constraints */
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #64748b;      /* Softer slate-500 gray for professional hierarchy */
+  max-width: 28rem;    /* Narrower line length for beautiful readability */
+}
+
+.tatvika-coming-soon-title {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #0a192f;
+  letter-spacing: -0.02em;
+}
+
+.tatvika-coming-soon-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.tatvika-coming-soon-button-primary,
+.tatvika-coming-soon-button-secondary {
+  width: 100%;
+  max-width: 260px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.95rem 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 180ms ease;
+}
+
+.tatvika-coming-soon-button-primary {
+  background: #0A192F;
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+
+.tatvika-coming-soon-button-primary:hover {
+  background: #141f2f;
+}
+
+.tatvika-coming-soon-button-secondary {
+  background: #ffffff;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.tatvika-coming-soon-button-secondary:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+@media (min-width: 640px) {
+  .tatvika-coming-soon-actions {
+    flex-direction: row;
+  }
 }
 
 .tatvika-page-loading {
