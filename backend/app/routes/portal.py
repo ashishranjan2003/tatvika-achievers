@@ -1,8 +1,9 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, status
 
-from app.crud.portal import get_navigation, get_section, list_sections
+from app.crud.portal import create_waitlist_signup, get_navigation, get_section, list_sections
 from app.models.common import SectionLayoutResponse
 from app.models.courses import NavigationResponse, PortalSectionResponse
+from app.models.waitlist import WaitlistCreateRequest, WaitlistResponse
 
 router = APIRouter(prefix='/portal', tags=['portal'])
 
@@ -67,3 +68,15 @@ async def section_detail(section_id: str) -> SectionLayoutResponse:
         route_path=item['route_path'],
         layout=layout,
     )
+
+
+@router.post('/waitlist', response_model=WaitlistResponse, status_code=status.HTTP_201_CREATED)
+async def waitlist_signup(payload: WaitlistCreateRequest) -> WaitlistResponse:
+    """
+    Register a new waitlist entry.
+
+    Used by coming-soon sections and professional launch pages to capture
+    visitor interest before content is published.
+    """
+    result = await create_waitlist_signup(payload.model_dump())
+    return WaitlistResponse(**result)
